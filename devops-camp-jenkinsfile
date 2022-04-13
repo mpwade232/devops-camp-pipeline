@@ -24,7 +24,7 @@ pipeline {
         stage('Application docker build') {
             steps {
                 echo "Building application image"
-                withCredentials([usernameColonPassword(credentialsId: '<YOUR CREDENTIAL ID NAME>', variable: 'HARBOR-AUTH')]) {
+                withCredentials([usernameColonPassword(credentialsId: 'mwade-harbor-auth', variable: 'HARBOR-AUTH')]) {
                     script {
                         sh 'docker build -t $APP_IMAGE_NAME-$COMMIT_HASH -f ./app/Dockerfile ./afs-labs-student'
                         docker.withRegistry('https://$HARBOR_REGISTRY', 'mwade-harbor-auth') {
@@ -51,7 +51,7 @@ pipeline {
         stage('Database docker build') {
             steps {
                  echo "Building database image"
-                withCredentials([usernameColonPassword(credentialsId: '<YOUR CREDENTIAL ID NAME>', variable: 'HARBOR-AUTH')]) {
+                withCredentials([usernameColonPassword(credentialsId: 'mwade-harbor-auth, variable: 'HARBOR-AUTH')]) {
                     script {
                         sh 'docker build -t $DB_IMAGE_NAME-$COMMIT_HASH -f ./db/Dockerfile ./afs-labs-student'
                         docker.withRegistry('https://$HARBOR_REGISTRY', 'mwade-harbor-auth') {
