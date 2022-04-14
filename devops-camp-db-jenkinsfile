@@ -1,18 +1,18 @@
 pipeline {
     agent {
-        
+        label 'jenkins-agent'
         environment {
             PIPELINE_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
             HARBOR_REGISTRY = 'harbor.dev.afsmtddso.com'
             HARBOR_PROJECT = 'mwade'
             DB_IMAGE_NAME = 'db'
-            label 'jenkins-agent'
+            
     }
     stages {
         stage('Application repository') {
             steps {
                 echo "Cloning application repository"
-                sh 'git clone 'https://github.com/mpwade232/afs-labs-student.git'
+                sh 'git clone https://github.com/mpwade232/afs-labs-student.git'
                 dir('afs-labs-student') {
                     script {
                         env.COMMIT_HASH = sh(script: 'git log --format=format:%h -1 --follow database/database.sql', returnStdout: true).trim()
@@ -47,7 +47,7 @@ pipeline {
                           }
                       }
                   }
-                  post {
+                  post { 
                     always {
                           echo "Clean local $DB_IMAGE_NAME image"
                           script {
