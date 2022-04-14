@@ -5,7 +5,7 @@ pipeline {
             PIPELINE_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
             HARBOR_REGISTRY = 'harbor.dev.afsmtddso.com'
             HARBOR_PROJECT = 'mwade'
-            DB_IMAGE_NAME = 'db
+            DB_IMAGE_NAME = 'db'
             label 'jenkins-agent'
     }
     stages {
